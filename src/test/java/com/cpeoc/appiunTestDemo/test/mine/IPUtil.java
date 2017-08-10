@@ -22,7 +22,7 @@ public class IPUtil {
 	 * 	2.获取网卡IP </br>
 	 */
 	public static List<String> getLocalIpAddress(){
-		List<String> IPList = new ArrayList<>();
+		List<String> IPList = new ArrayList<String>();
 		try {
 
 			Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();

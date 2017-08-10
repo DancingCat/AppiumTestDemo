@@ -13,7 +13,7 @@ public interface AppiumServerConfig {
 	String serverHost = "192.168.31.119";
 	
 	/** 运行用例的客户端，可选：android和ios */
-	String client = "ios";
+	String client = "android";
 	
 	/** 是否真机运行(主要用于ios)，true时确保真机与电脑连接正常，false时确保模拟器存在 */
 	boolean realDevice = false;

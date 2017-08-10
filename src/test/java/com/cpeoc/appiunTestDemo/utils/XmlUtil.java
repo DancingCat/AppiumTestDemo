@@ -3,7 +3,6 @@ package com.cpeoc.appiunTestDemo.utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,7 +29,7 @@ public class XmlUtil {
 	@SuppressWarnings("unused")
 	public static void creatTestNGXML() {
 		//配置文件基础校验
-		ConfigFileCheckUtil.checkAllConfigAvialable();
+		//ConfigFileCheckUtil.checkAllConfigAvialable();
 		
 		// 生成device json
 		List<DeviceJsonBean> allDeviceJson = JsonUtil.createAllDeviceJson();
@@ -94,7 +93,6 @@ public class XmlUtil {
 	 * @see
 	 * 	1.读取配置defaultPackage下所有Class，返回List QualifiedName  </br>
 	 */
-	@SuppressWarnings("unused")
 	public static Document creatXMLByClass(List<DeviceJsonBean> allDeviceJson,
 			Element suite, Document document) {
 		
@@ -107,24 +105,8 @@ public class XmlUtil {
 			for (int i=0;i<allTestCaseQualifiedNameList.size();i++) {
 				String testCaseQualifiedName = allTestCaseQualifiedNameList.get(i);
 				DeviceJsonBean deviceJsonBean = allDeviceJson.get(i);
-				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-				Configuration configuration = deviceJsonBean.getConfiguration();
-				String deviceName = capabilities.getBrowserName();
-				// 添加test节点
-				Element test = suite.addElement("test");
-				test.addAttribute("name", deviceName);
-				// 添加parameter deviceName
-				Element parameter1 = test.addElement("parameter");
-				parameter1.addAttribute("name", "deviceName");
-				parameter1.addAttribute("value", deviceName);
-				// 添加parameter platformVersion
-				Element parameter2 = test.addElement("parameter");
-				parameter2.addAttribute("name", "platformVersion");
-				parameter2.addAttribute("value", capabilities.getVersion());
-				// 添加parameter port
-				Element parameter3 = test.addElement("parameter");
-				parameter3.addAttribute("name", "port");
-				parameter3.addAttribute("value", configuration.getPort() + "");
+				//新增test  新增device info parameter
+				Element test = deviceIntoTestElement(deviceJsonBean,suite);
 				
 				//添加classes
 				Element classes = test.addElement("classes");
@@ -137,24 +119,8 @@ public class XmlUtil {
 		
 		// suite下添加子节点
 		for (DeviceJsonBean deviceJsonBean : allDeviceJson) {
-			Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-			Configuration configuration = deviceJsonBean.getConfiguration();
-			String deviceName = capabilities.getBrowserName();
-			// 添加test节点
-			Element test = suite.addElement("test");
-			test.addAttribute("name", deviceName);
-			// 添加parameter deviceName
-			Element parameter1 = test.addElement("parameter");
-			parameter1.addAttribute("name", "deviceName");
-			parameter1.addAttribute("value", deviceName);
-			// 添加parameter platformVersion
-			Element parameter2 = test.addElement("parameter");
-			parameter2.addAttribute("name", "platformVersion");
-			parameter2.addAttribute("value", capabilities.getVersion());
-			// 添加parameter port
-			Element parameter3 = test.addElement("parameter");
-			parameter3.addAttribute("name", "port");
-			parameter3.addAttribute("value", configuration.getPort() + "");
+			//新增test  新增device info parameter
+			Element test = deviceIntoTestElement(deviceJsonBean,suite);
 			
 			//添加classes
 			Element classes = test.addElement("classes");
@@ -170,6 +136,9 @@ public class XmlUtil {
 				Map<String, List<String>> deviceClassMap = allotOfAverage(
 						DeviceUtil.getDeviceListFromDeviceJsonBeanList(allDeviceJson),
 						allTestCaseQualifiedNameList);
+				
+				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
+				String deviceName = capabilities.getBrowserName();
 				List<String> testClassList = deviceClassMap.get(deviceName);			
 //				//防止class少于设备数时，部分设备没有分到class导致空指针异常
 //				if(null!=testClassList){
@@ -197,29 +166,13 @@ public class XmlUtil {
 	public static Document creatXMLByModule(List<DeviceJsonBean> allDeviceJson,
 			Element suite, Document document) {
 		//获取平均分配
-		Map<String, List<String>> deviceModuleMap = allotOfAverage(
-				DeviceUtil.getDeviceListFromDeviceJsonBeanList(allDeviceJson),
-				getAllModule());
+		List<String> allModule = getAllModule();
+		List<String> deviceList = DeviceUtil.getDeviceListFromDeviceJsonBeanList(allDeviceJson);
+		Map<String, List<String>> deviceModuleMap = allotOfAverage(deviceList,allModule);
 		// suite下添加子节点
 		for (DeviceJsonBean deviceJsonBean : allDeviceJson) {
-			Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-			Configuration configuration = deviceJsonBean.getConfiguration();
-			String deviceName = capabilities.getBrowserName();
-			// 添加test节点
-			Element test = suite.addElement("test");
-			test.addAttribute("name", deviceName);
-			// 添加parameter deviceName
-			Element parameter1 = test.addElement("parameter");
-			parameter1.addAttribute("name", "deviceName");
-			parameter1.addAttribute("value", deviceName);
-			// 添加parameter platformVersion
-			Element parameter2 = test.addElement("parameter");
-			parameter2.addAttribute("name", "platformVersion");
-			parameter2.addAttribute("value", capabilities.getVersion());
-			// 添加parameter port
-			Element parameter3 = test.addElement("parameter");
-			parameter3.addAttribute("name", "port");
-			parameter3.addAttribute("value", configuration.getPort() + "");
+			//新增test  新增device info parameter
+			Element test = deviceIntoTestElement(deviceJsonBean,suite);
 
 			// 添加groups
 			String defaultexcgroup = TestCaseConfig.defaultExcGroup.trim();
@@ -249,25 +202,84 @@ public class XmlUtil {
 			}
 			// 添加packages
 			Element packages = test.addElement("packages");
-			Element pkg = packages.addElement("package");
-			List<String> muduleList = deviceModuleMap.get(deviceName);
-			for (String module : muduleList) {
-				pkg.addAttribute("name", module);
-			}
-			String excludepackages = TestCaseConfig.excludePackages.trim();
-			if (excludepackages != "") {
-				String[] pkgs = excludepackages.split(",");
-				for (String pk : pkgs) {
-					Element exclude = pkg.addElement("exclude");
-					exclude.addAttribute("name", pk);
+			
+			
+			//当parallel=false时，采用平均分配算法
+			boolean parallel = AppiumServerConfig.parallel ;
+			boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
+			if(!parallel && !isIOS){
+				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
+				String deviceName = capabilities.getBrowserName();
+				List<String> muduleList = deviceModuleMap.get(deviceName);
+				for (String module : muduleList) {
+					Element pkg = packages.addElement("package");
+					pkg.addAttribute("name", module);
+					writeExcludePakage(pkg,module);
 				}
-
+			}else{
+				for (String module : allModule) {
+					Element pkg = packages.addElement("package");
+					pkg.addAttribute("name", module);
+					writeExcludePakage(pkg,module);
+				}
 			}
+			
+			
 
 		}
 		return document;
 	}
-
+	/**
+	 * 写入package的exclude
+	 * @param pkg
+	 * @param moduleName
+	 * @see	
+	 * 	1.如果excludePkg包含了模块，则在模块下写入exclude
+	 */
+	public static void writeExcludePakage(Element pkg,String moduleName){
+		String excludepackages = TestCaseConfig.excludePackages.trim();
+		if (excludepackages != "") {
+			String[] pkgs = excludepackages.split(",");
+			for (String pk : pkgs) {
+				if(pk.contains(moduleName)){
+					Element exclude = pkg.addElement("exclude");
+					exclude.addAttribute("name", pk);
+				}
+				
+			}
+		}
+	}
+	
+	/**
+	 * 新增test节点  新增device info parameter
+	 * 
+	 * @param deviceJsonBean  
+	 * @param suite  suite节点Element
+	 * @return  test 节点Element
+	 */
+	public static Element deviceIntoTestElement(DeviceJsonBean deviceJsonBean,Element suite){
+		Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
+		Configuration configuration = deviceJsonBean.getConfiguration();
+		String deviceName = capabilities.getBrowserName();
+		// 添加test节点
+		Element test = suite.addElement("test");
+		test.addAttribute("name", deviceName);
+		// 添加parameter deviceName
+		Element parameter1 = test.addElement("parameter");
+		parameter1.addAttribute("name", "deviceName");
+		parameter1.addAttribute("value", deviceName);
+		// 添加parameter platformVersion
+		Element parameter2 = test.addElement("parameter");
+		parameter2.addAttribute("name", "platformVersion");
+		parameter2.addAttribute("value", capabilities.getVersion());
+		// 添加parameter port
+		Element parameter3 = test.addElement("parameter");
+		parameter3.addAttribute("name", "port");
+		parameter3.addAttribute("value", configuration.getPort() + "");
+		
+		return test;
+	}	
+	
 	/**
 	 * 获取TestCaseConfig.defaultPackage 下级目录
 	 * 
@@ -315,6 +327,17 @@ public class XmlUtil {
 				}
 			}
 		}
+		//删除excludePackage
+		String excludepackages = TestCaseConfig.excludePackages.trim();
+		String[] excludepkgs = excludepackages.split(",");
+		for (String module : moduleList) {
+			for (String pkg : excludepkgs) {
+				if(module.equals(pkg)){
+					moduleList.remove(module);
+				}
+			}
+		}
+		
 		return moduleList;
 	}
 
@@ -323,9 +346,6 @@ public class XmlUtil {
 		
 		creatTestNGXML();
 		//getModules();
-		
-
-		
 	}
 
 	/**

@@ -23,7 +23,7 @@ public interface TestCaseConfig {
 	/** 默认运行的包，必填;不支持多个包；此包应包含excludePackages */
 	String defaultPackage = "com.cpeoc.appiunTestDemo.test";
 	
-	/** 不包含的包，可为空，多个包之间以逗号分隔 */
+	/** 不包含的包，可为空，多个包之间以逗号分隔 */	
 	String excludePackages="com.cpeoc.appiunTestDemo.test.mine";
 	
 	
