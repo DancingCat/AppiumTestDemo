@@ -24,7 +24,7 @@ public interface TestCaseConfig {
 	String defaultPackage = "com.cpeoc.appiunTestDemo.test";
 	
 	/** 不包含的包，可为空，多个包之间以逗号分隔 */	
-	String excludePackages="com.cpeoc.appiunTestDemo.test.mine";
+	String excludePackages="";
 	
 	
 }

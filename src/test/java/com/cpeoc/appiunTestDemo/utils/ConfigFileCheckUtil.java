@@ -1,9 +1,12 @@
 package com.cpeoc.appiunTestDemo.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
-import com.cpeoc.appiunTestDemo.conf.IOSDeviceInfoConfig;
+import com.cpeoc.appiunTestDemo.conf.IOSSimulatorConfig;
 import com.cpeoc.appiunTestDemo.conf.TestCaseConfig;
 
 /**
@@ -63,21 +66,42 @@ public class ConfigFileCheckUtil {
 			return;
 		}
 		
-		//************************IOSDeviceInfoConfig*************************
+		//************************IOSSimulatorConfig*************************
 		//iOSSimulatorDevices
-		String iossimulatordevices = IOSDeviceInfoConfig.iOSSimulatorDevices.trim();
+		String iossimulatordevices = IOSSimulatorConfig.iOSSimulatorDevices.trim();
+		int deviceamount = IOSSimulatorConfig.deviceAmount;
 		boolean realdevice = AppiumServerConfig.realDevice;
-		if(client.equals("ios") && !realdevice){
+		if(client.equals("ios") && !realdevice){						
+			//若为空，判断cover 和 deviceAmount；否则判断设备名称是否有重复
 			if(iossimulatordevices.isEmpty()){
-				System.out.println("请在IOSDeviceInfoConfig配置文件中配置正确的iOSSimulatorDevices，详情请查看配置文件说明！");
-				return;
-			}
-			//有一个设备可用即可
-			List<String> ioSimulatorList = DeviceUtil.getIOSimulatorList();
-			if(null==ioSimulatorList){
-				System.out.println("请在IOSDeviceInfoConfig配置文件中配置正确的iOSSimulatorDevices，详情请查看配置文件说明！");
-				return;
-			}		
+				if(deviceamount < 1){
+					System.out.println("请在IOSSimulatorConfig配置文件中配置正确的deviceamount，设备总数至少是1！");
+					return;
+				}
+			}else{
+				//有一个设备可用即可
+				List<String> iOSSimulatorList = DeviceUtil.getIOSSimulatorListByConfig();
+				if(null==iOSSimulatorList){
+					System.out.println("请在IOSSimulatorConfig配置文件中配置正确的iOSSimulatorDevices，详情请查看配置文件说明！");
+					return;
+				}
+				//是否包含重复
+				Map<String,Integer> count = new HashMap<>();
+				for (String iOSSimulator : iOSSimulatorList) {
+					if(count.containsKey(iOSSimulator)){
+						count.put(iOSSimulator, count.get(iOSSimulator).intValue()+1);
+					}else{
+						count.put(iOSSimulator, 1);
+					}
+				}
+				ArrayList<Integer> list = new ArrayList<>(count.values());
+				for (Integer integer : list) {
+					if(integer>=2){
+						System.out.println("请在IOSSimulatorConfig配置文件中配置正确的iOSSimulatorDevices，不允许出现重复设备名称！");
+						return;
+					}
+				}
+			}						
 		}
 		//************************TestCaseConfig*************************
 		//whereIsTestCode 必填，只能选test或main
@@ -95,6 +119,18 @@ public class ConfigFileCheckUtil {
 			return;
 		}
 		
-		
+		//************************综合配置检查*************************
+		//是否存在已连接可用设备
+		if(client.equals("android")){
+			if(DeviceUtil.getAvailableAndroidDeviceList().isEmpty()){
+				System.out.println("adb devices 当前未检测到已连接可用设备，请检查或重启adb（执行adb kill-server、adb start-server）！");
+				return;
+			}
+		}else{
+			if(DeviceUtil.getIOSDevices().isEmpty()){
+				System.out.println("未获取到可用的iOS设备，请检查配置或usb连接是否正常！");
+				return;
+			}
+		}
 	}
 }

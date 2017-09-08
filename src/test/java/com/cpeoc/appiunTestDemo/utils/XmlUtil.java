@@ -24,12 +24,15 @@ import com.cpeoc.appiunTestDemo.conf.TestCaseConfig;
  * @see 1.主要用来生成testng.xml配置文件 </br>
  */
 public class XmlUtil {
-
+	
+	static boolean parallel = AppiumServerConfig.parallel ;
+	static boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
+	
 	// 读取配置文件 client iOS铁定串行 Android另行判断
 	@SuppressWarnings("unused")
 	public static void creatTestNGXML() {
 		//配置文件基础校验
-		//ConfigFileCheckUtil.checkAllConfigAvialable();
+		ConfigFileCheckUtil.checkAllConfigAvialable();
 		
 		// 生成device json
 		List<DeviceJsonBean> allDeviceJson = JsonUtil.createAllDeviceJson();
@@ -50,7 +53,7 @@ public class XmlUtil {
 		// 属性 name = "AppiumTestDemo"
 		suite.addAttribute("name", projectName);
 		// 判断parallel
-		if (AppiumServerConfig.parallel && !AppiumServerConfig.client.equals("ios")) {
+		if (parallel && ! isIOS ) {
 			suite.addAttribute("parallel", "tests");
 			suite.addAttribute("thread-count", allDeviceJson.size() + "");
 		}
@@ -63,7 +66,7 @@ public class XmlUtil {
 		
 		int moduleSize = moduleList.size();
 		int deviceSize = allDeviceJson.size();
-		if (moduleSize >= deviceSize || AppiumServerConfig.client.equals("ios")) {
+		if (moduleSize >= deviceSize || isIOS) {
 			document = creatXMLByModule(allDeviceJson, suite, document);
 		} else {
 			document = creatXMLByClass(allDeviceJson, suite, document);
@@ -100,7 +103,7 @@ public class XmlUtil {
 		List<String> allTestCaseQualifiedNameList = fu.getAllTestCaseQualifiedName();
 		
 		//有一种极端情况  class数少于设备数
-		if(allDeviceJson.size()>allTestCaseQualifiedNameList.size() && !AppiumServerConfig.parallel){
+		if(allDeviceJson.size()>allTestCaseQualifiedNameList.size() && !parallel){
 			//以数量少的为单位循环
 			for (int i=0;i<allTestCaseQualifiedNameList.size();i++) {
 				String testCaseQualifiedName = allTestCaseQualifiedNameList.get(i);
@@ -127,7 +130,7 @@ public class XmlUtil {
 			
 			//获取平均分配				
 			//如果parallel=true，每个设备用例都一样，false时才采用平均分配算法
-			if(AppiumServerConfig.parallel){
+			if(parallel){
 				for (String testCaseQualifiedName : allTestCaseQualifiedNameList) {
 					Element cla = classes.addElement("class");
 					cla.addAttribute("name", testCaseQualifiedName);
@@ -204,9 +207,7 @@ public class XmlUtil {
 			Element packages = test.addElement("packages");
 			
 			
-			//当parallel=false时，采用平均分配算法
-			boolean parallel = AppiumServerConfig.parallel ;
-			boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
+			//当parallel=false时，采用平均分配算法		
 			if(!parallel && !isIOS){
 				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
 				String deviceName = capabilities.getBrowserName();
@@ -272,10 +273,16 @@ public class XmlUtil {
 		Element parameter2 = test.addElement("parameter");
 		parameter2.addAttribute("name", "platformVersion");
 		parameter2.addAttribute("value", capabilities.getVersion());
-		// 添加parameter port
+		// 添加parameter port  iOS端口写hubport
 		Element parameter3 = test.addElement("parameter");
 		parameter3.addAttribute("name", "port");
-		parameter3.addAttribute("value", configuration.getPort() + "");
+		if(!isIOS){
+			parameter3.addAttribute("value", configuration.getPort() + "");
+		}else{
+			parameter3.addAttribute("value", configuration.getHubPort() + "");
+		}
+		
+		
 		
 		return test;
 	}	

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [appiumTestDemo]">
+  <parameter name="port" value="9000"/>
+  <parameter name="platformVersion" value="6.0"/>
+  <parameter name="deviceName" value="fe3123d2"/>
+  <listeners>
+    <listener class-name="com.cpeoc.appiunTestDemo.utils.TestNGListener"/>
+  </listeners>
+  <test name="fe3123d2">
+    <parameter name="port" value="9000"/>
+    <parameter name="platformVersion" value="6.0"/>
+    <parameter name="deviceName" value="fe3123d2"/>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
+    <classes>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.BaseDriver"/>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.BaseDriver2"/>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver"/>
+    </classes>
+  </test> <!-- fe3123d2 -->
+  <test name="fe3123d2(failed)">
+    <parameter name="port" value="9000"/>
+    <parameter name="platformVersion" value="6.0"/>
+    <parameter name="deviceName" value="fe3123d2"/>
+    <classes>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.BaseDriver">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.BaseDriver -->
+      <class name="com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver">
+        <methods>
+          <include name="test"/>
+        </methods>
+      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver -->
+    </classes>
+  </test> <!-- fe3123d2(failed) -->
+</suite> <!-- Failed suite [appiumTestDemo] -->

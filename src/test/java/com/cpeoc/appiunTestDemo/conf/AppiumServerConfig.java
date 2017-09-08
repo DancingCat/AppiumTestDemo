@@ -18,7 +18,7 @@ public interface AppiumServerConfig {
 	/** 是否真机运行(主要用于ios)，true时确保真机与电脑连接正常，false时确保模拟器存在 */
 	boolean realDevice = false;
 	
-	/** 并行运行，true并行，false串行；ios不支持并行;暂时不支持其他值，当填入为true时默认parallel="tests" */
+	/** 多机并行运行，true并行，false串行；ios不支持并行;暂时不支持其他值，当填入为true时默认parallel="tests" */
 	boolean parallel = false;
 	
 	/** 服务端使用的起始端口号，可自定义 */

@@ -1,22 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="appiunTestDemo">
-  <test name="127.0.0.1:62001">
-    <parameter name="deviceName" value="127.0.0.1:62001"/>
-    <parameter name="platformVersion" value="4.4"/>
-    <parameter name="port" value="9002"/>
-    <classes>
-      <class name="com.cpeoc.appiunTestDemo.test.Fssss"/>
-      <class name="com.cpeoc.appiunTestDemo.test.xx.Xxxxx"/>
-    </classes>
+<suite name="appiumTestDemo">
+  <test name="iPhone 6s">
+    <parameter name="deviceName" value="iPhone 6s"/>
+    <parameter name="platformVersion" value="10.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
   </test>
-  <test name="fe3123d2">
-    <parameter name="deviceName" value="fe3123d2"/>
-    <parameter name="platformVersion" value="6.0"/>
-    <parameter name="port" value="9003"/>
-    <classes>
-      <class name="com.cpeoc.appiunTestDemo.test.xx.CopyOfXzzzz"/>
-    </classes>
+  <test name="iPhone 6 Plus">
+    <parameter name="deviceName" value="iPhone 6 Plus"/>
+    <parameter name="platformVersion" value="10.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
+  </test>
+  <test name="iPhone 5">
+    <parameter name="deviceName" value="iPhone 5"/>
+    <parameter name="platformVersion" value="9.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
+  </test>
+  <test name="iPhone 5s">
+    <parameter name="deviceName" value="iPhone 5s"/>
+    <parameter name="platformVersion" value="10.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
+  </test>
+  <test name="iPhone 6">
+    <parameter name="deviceName" value="iPhone 6"/>
+    <parameter name="platformVersion" value="10.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
+  </test>
+  <test name="iPhone 4s">
+    <parameter name="deviceName" value="iPhone 4s"/>
+    <parameter name="platformVersion" value="9.3"/>
+    <parameter name="port" value="9000"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+        <include name="wode"/>
+        <exclude name="shangcheng"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="com.cpeoc.appiunTestDemo.test.mine"/>
+      <package name="com.cpeoc.appiunTestDemo.test.xx"/>
+      <package name="com.cpeoc.appiunTestDemo.test.yy"/>
+    </packages>
   </test>
 </suite>

@@ -50,7 +50,7 @@ public class JsonUtil {
 		
 		List<DeviceJsonBean> deviceJsonBeanList  = new ArrayList<DeviceJsonBean>();
 		//platForm
-		String platForm = AppiumServerConfig.client;
+		String platForm = AppiumServerConfig.client.toLowerCase();
 		
 		// 创建临时文件夹tmp
 		File tmp = new File("tmp");
@@ -66,16 +66,13 @@ public class JsonUtil {
 		Map<String, String> deviceMap = null;
 		// 根据配置文件指定的client，获取对应设备系统版本
 		// 安卓设备直接获取可用设备
-		if (platForm.equals("android") || platForm.equals("Android") ) {
-			deviceList = DeviceUtil.getAvailableAndroidDevicesList();
-			deviceMap = DeviceUtil.getAvailableAndroidDevicesMap();
+		if (platForm.equals("android")) {
+			deviceList = DeviceUtil.getAvailableAndroidDeviceList();
+			deviceMap = DeviceUtil.getAvailableAndroidDeviceMap();
 			// 苹果设备需要根据是否真机运行，模拟器则读取IOSDeviceInfoConfig配置文件
-		} else if (AppiumServerConfig.realDevice) {
-			deviceList = DeviceUtil.getiAvailableOSDevicesList();
-			deviceMap = DeviceUtil.getAvailableiOSDevicesMap();
-		} else {
-			deviceList = DeviceUtil.getIOSimulatorList();
-			deviceMap = DeviceUtil.getIOSimulatorMap();
+		} else  {
+			deviceList = DeviceUtil.getIOSDevices();
+			deviceMap = DeviceUtil.getIOSDevicesMap();
 		}
 
 		// 获取可用端口列表 +hubport 一个
