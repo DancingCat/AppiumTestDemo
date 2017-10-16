@@ -19,7 +19,10 @@ public interface AppiumServerConfig {
 	boolean realDevice = false;
 	
 	/** 多机并行运行，true并行，false串行；ios不支持并行;暂时不支持其他值，当填入为true时默认parallel="tests" */
-	boolean parallel = false;
+	boolean parallel = true;
+	
+	/** 并发运行测试用例时是否运行相同的用例 */
+	boolean sameTestCase = true;
 	
 	/** 服务端使用的起始端口号，可自定义 */
 	int startPortNum = 9000;

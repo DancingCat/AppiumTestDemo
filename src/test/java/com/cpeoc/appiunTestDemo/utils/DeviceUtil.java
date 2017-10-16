@@ -16,38 +16,19 @@ import com.cpeoc.appiunTestDemo.conf.IOSSimulatorConfig;
  * @date 2017-7-18
  *
  */
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidate;
 public class DeviceUtil {
 	
 	static String os = System.getProperty("os.name");
 	
-	/**
-	 * 获取可用的安卓真机设备Map
-	 * @return 可用安卓真机设备deviceName的Map
-	 * @see
-	 * 	key deviceName  value Version
-	 */
-	public static Map<String,String> getAvailableAndroidDeviceMap(){
-		List<String> devicesList = getAvailableAndroidDeviceList();
-		
-		Map<String, String> deviceMap = new HashedMap();
-		for (String device : devicesList) {
-			String androidSysVersionByDeviceName = getAndroidSysVersionByDeviceName(device);
-			deviceMap.put(device, androidSysVersionByDeviceName);
-		}	
-		
-		return deviceMap;
-		
-	}
 	
 	/**
 	 * 获取可用的安卓真机设备List
-	 * @return 可用安卓真机设备deviceName的List
+	 * @return 可用安卓真机设备deviList 可能为null
 	 * @see
-	 * 	deviceName  List
+	 * 	Device  List
 	 */
-	public static List<String> getAvailableAndroidDeviceList(){
-		List<String> deviceList =new ArrayList<>();
+	public static List<Device> getAndroidDevicesList(){
+		List<Device> deviceList =new ArrayList<>();
 		String cmd = "";
 		if(os.contains("Windows")){
 			cmd ="adb devices";
@@ -57,16 +38,34 @@ public class DeviceUtil {
 		
 		List<String> adbList = CmdUtil.getInstance().execCmd(cmd);
 		
-		for (String device : adbList) {
+		for (String line : adbList) {
 			//包含device表示设备在线
-			if(device.contains("device") & !device.contains("devices")){
-				deviceList.add(device.split("\t")[0].trim());
+			if(line.contains("device") & !line.contains("devices")){
+				Device device = new Device();
+				String deviceName = line.split("\t")[0].trim();
+				device.setDeviceName(deviceName);
+				device.setSysVersion(getAndroidSysVersionByDeviceName(deviceName));	
+				//将设备添加到list
+				deviceList.add(device);
+			}
+		}
+		if(!deviceList.isEmpty()){
+			//获取可用端口列表
+			int deviceSum = deviceList.size();
+			List<Integer> availablePortList = PortUtil.getAvailablePortList(deviceSum*2);
+			for (int i=0;i<deviceSum;i++) {
+				Device de = deviceList.get(i);
+				int serverPort = availablePortList.get(i);
+				int bsPort = availablePortList.get(deviceSum+i);
+				de.setServerPort(serverPort);
+				de.setBoostrapPort(bsPort);
 			}
 		}
 		
 		return deviceList;
 		
 	}
+	
 	
 	/**
 	 * 获取iOS真机deviceName-SysVersion Map
@@ -78,7 +77,7 @@ public class DeviceUtil {
 		List<String> udidList = getIOSRealDeviceUdidList();
 		Map<String, String> deviceMap = new HashedMap();
 		for (String udid : udidList) {
-			String getiOSSysVersionByUdid = getiOSSysVersionByUdid(udid);
+			String getiOSSysVersionByUdid = getIOSRealDeviceSysVersionByUdid(udid);
 			deviceMap.put(udid, getiOSSysVersionByUdid);
 		}
 		return deviceMap;
@@ -94,14 +93,26 @@ public class DeviceUtil {
 	 * 	使用system_profiler SPUSBDataType | grep "Serial Number" 获取udid列表
 	 * 	再使用instruments -s devices | grep udid获取deviceName
 	 */
-	public static List<String> getIOSRealDeviceList(){			
-		List<String> iOSRealDeviceList = new ArrayList<>();
+	public static List<Device> getIOSRealDeviceList(){			
+		List<Device> iOSRealDeviceList = new ArrayList<>();
 		List<String> iosRealDeviceUdidList = getIOSRealDeviceUdidList();
-		if(null != iosRealDeviceUdidList){
+		List<Integer> availablePortList = PortUtil.getAvailablePortList(2);
+		if(!iosRealDeviceUdidList.isEmpty()){
 			for (String udid : iosRealDeviceUdidList) {
 				List<String> deviceInfo = CmdUtil.getInstance().execCmd("instruments -s devices | grep " + udid);
-				if(null != deviceInfo){
-					iOSRealDeviceList.add(deviceInfo.get(0).split(" ")[0]);
+				if(!deviceInfo.isEmpty()){
+					Device de = new Device();
+					//deviceName
+					de.setDeviceName(deviceInfo.get(0).split(" ")[0]);
+					//udid
+					de.setUdid(udid);
+					//sysVersion
+					String sysVersion = getIOSRealDeviceSysVersionByUdid(udid);
+					de.setSysVersion(sysVersion);
+					de.setServerPort(availablePortList.get(0));
+					de.setBoostrapPort(availablePortList.get(1));
+					//将设备添加到list
+					iOSRealDeviceList.add(de);
 				}
 			}
 		}
@@ -119,7 +130,7 @@ public class DeviceUtil {
 	public static List<String> getIOSRealDeviceUdidList(){
 		List<String> iOSRealDeviceUdidList = new ArrayList<>();
 		List<String> lines = CmdUtil.getInstance().execCmd("system_profiler SPUSBDataType | grep 'Serial Number'");
-		if(null != lines){
+		if(!lines.isEmpty()){
 			for (String line : lines) {
 				String deviceNameLine = line.trim();
 				if(deviceNameLine.length()==55){
@@ -162,7 +173,7 @@ public class DeviceUtil {
 	 * @update
 	 * 	
 	 */
-	public static String getiOSSysVersionByUdid(String udid){
+	public static String getIOSRealDeviceSysVersionByUdid(String udid){
 		List<String> op = CmdUtil.getInstance().execCmd("ideviceinfo -u "+udid);
 		for (String line : op) {
 			if(line.contains("ProductVersion")){
@@ -183,13 +194,28 @@ public class DeviceUtil {
 	 * 	过滤条件：模拟器名称i开头、行内不包含+、包含Simulator字符
 	 * 	
 	 */
-	public static List<String> getIOSSimulatorList(){		
-		List<String> deviceList = new ArrayList<>();
+	public static List<Device> getIOSSimulatorList(){		
+		List<Device> deviceList = new ArrayList<>();
 		Map<String, String> iosSimulatorMap = getIOSSimulatorMap();
+		List<Integer> availablePortList = PortUtil.getAvailablePortList(2);
 		Iterator<Entry<String, String>> iterator = iosSimulatorMap.entrySet().iterator();
 		while (iterator.hasNext()) {
 			Entry<String, String> next = iterator.next();
-			deviceList.add(next.getKey());	
+			Device de = new Device();
+			//deviceName
+			String deviceName = next.getKey();
+			de.setDeviceName(deviceName);
+			//sysVersion
+			String sysVersion = next.getValue();
+			de.setSysVersion(sysVersion);
+			//serverPort
+			int serverPort = availablePortList.get(0);
+			de.setServerPort(serverPort);
+			//bsPort
+			int bsPort = availablePortList.get(1);
+			de.setBoostrapPort(bsPort);
+			
+			deviceList.add(de);	
 		}
 		return deviceList;
 	}
@@ -218,10 +244,10 @@ public class DeviceUtil {
 	}
 	
 	/**
-	 * 自动获取系统iOS模拟器列表deviceName-deviceName Map
+	 * 自动获取系统iOS模拟器列表deviceName-sysVersion Map
 	 * @return  Map
 	 * @see
-	 * 	key deviceName value SydeviceNamesVersion
+	 * 	key deviceName value sysVersion
 	 */
 	public static Map<String,String> getIOSSimulatorMap(){
 		Map<String,String> iOSimulatorMap = new HashedMap();
@@ -252,36 +278,25 @@ public class DeviceUtil {
 	 * 通过配置文件获取iOS模拟器List
 	 * @return  List
 	 */
-	public static List<String> getIOSSimulatorListByConfig(){
+	public static List<Device> getIOSSimulatorListByConfig(){
 		String[] simDevices = IOSSimulatorConfig.iOSSimulatorDevices.trim().split(",");
 		
-		List<String> deviceList = new ArrayList<>();
+		List<Device> deviceList = new ArrayList<>();
+		List<Integer> availablePortList = PortUtil.getAvailablePortList(2);
 		for (String device : simDevices) {
 			String[] deviceInfo = device.split(":");
 			String deviceName = deviceInfo[0].trim();
+			String sysVersion = deviceInfo[1].trim();
 			//String value = deviceInfo[1].trim();
-			deviceList.add(deviceName);
+			Device de = new Device();
+			de.setDeviceName(deviceName);
+			de.setSysVersion(sysVersion);
+			de.setServerPort(availablePortList.get(0));
+			de.setBoostrapPort(availablePortList.get(1));
+			
+			deviceList.add(de);
 		}
 		return deviceList;
-	}
-	
-	
-	/**
-	 * 通过配置文件获取iOS模拟器Map
-	 * @return  Map
-	 * @see
-	 * 	key deviceName value SysVersion
-	 */
-	public static Map<String,String> getIOSSimulatorMapByConfig(){
-		String[] simDevices = IOSSimulatorConfig.iOSSimulatorDevices.split(",");			
-		Map<String,String> deviceMap = new HashedMap();
-		for (String device : simDevices) {
-			String[] deviceInfo = device.split(":");
-			String key = deviceInfo[0].trim();
-			String value = deviceInfo[1].trim();
-			deviceMap.put(key, value);
-		}	
-		return deviceMap;
 	}
 	
 	/**
@@ -299,24 +314,10 @@ public class DeviceUtil {
 		}
 		return notBlankName;
 	}
-	
-	/**
-	 * 从DeviceJsonBeanList中获取deviceList
-	 * @param list
-	 * @return
-	 */
-	public static List<String> getDeviceListFromDeviceJsonBeanList(List<DeviceJsonBean> list){
-		List<String> deviceList = new ArrayList<>();
-		for (DeviceJsonBean deviceJson : list) {
-			List<Capabilities> capabilities = deviceJson.getCapabilities();
-			deviceList.add(capabilities.get(0).getBrowserName());
-		}		
-		return deviceList;	
-	}
 	/**
 	 * 获取iOS设备列表 
 	 */
-	public static List<String> getIOSDevices(){
+	public static List<Device> getIOSDevicesList(){
 		//真机
 		if(AppiumServerConfig.realDevice){
 			return getIOSRealDeviceList();
@@ -331,22 +332,17 @@ public class DeviceUtil {
 			}			
 		}
 	}
+
 	/**
-	 * 获取iOS设备-系统版本Map
+	 * 从设备list中获取设备名list
+	 * @param deivceList
+	 * @return   deviceNameList
 	 */
-	public static Map<String,String> getIOSDevicesMap(){
-		//真机
-		if(AppiumServerConfig.realDevice){
-			return getIOSRealDeviceMap();
-		//模拟器
-		}else{
-			//手动配置
-			if(!IOSSimulatorConfig.iOSSimulatorDevices.isEmpty()){
-				return getIOSSimulatorMapByConfig();
-			//自动获取
-			}else{
-				return getIOSSimulatorMap();
-			}			
+	public static List<String> getDeviceNameList(List<Device> deivceList) {
+		List<String>  deviceNameList = new ArrayList<>();
+ 		for (Device device : deivceList) {
+ 			deviceNameList.add(device.getDeviceName());
 		}
+		return deviceNameList;
 	}
 }

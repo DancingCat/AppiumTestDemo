@@ -19,39 +19,39 @@ public class ConfigFileCheckUtil {
 	/**
 	 * 配置文件所有字段校验
 	 */
-	public static void checkAllConfigAvialable() {
+	public static boolean checkAllConfigAvialable(List<Device> deviceList) {
 		//************************AppiumServerConfig*************************
 		//serverHost ipv4格式
 		String serverhost = AppiumServerConfig.serverHost.trim();
 		String regex = "^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$"; 
 		if(serverhost.isEmpty() || !serverhost.matches(regex)){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的serverHost，ipv4格式！");
-			return;
+			return false;
 		}
 		//client 必填，可选Android和iOS
 		String client = AppiumServerConfig.client.trim().toLowerCase();
 		boolean isStringTrue = client.equals("android") || client.equals("ios");
 		if(client.isEmpty() || !isStringTrue){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的client，可选ios或android！");
-			return;
+			return false;
 		}
 		String os = System.getProperty("os.name");
 		if(!os.contains("Mac") && client.equals("ios")){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的client，非Mac os操作系统下无法运行iOS测试！");
-			return;
+			return false;
 		}
 		//startPortNum 1~65535
 		int startportnum = AppiumServerConfig.startPortNum;
 		if(startportnum <= 0 || startportnum > 65535){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的startPortNum，端口可选范围1~65535！");
-			return;
+			return false;
 		}
 		//adbPath Windows可不填 Mac必填
 		String adbpath = AppiumServerConfig.adbPath.trim();
 		
 		if(!os.contains("Windows") && adbpath.isEmpty()){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的adbpath，非Windows操作系统请配置adbpath并确保其可用！");
-			return;
+			return false;
 		}
 		boolean adbUseable = false;
 		String cmd = os.contains("Windows")?" adb version":adbpath +" version";
@@ -63,7 +63,7 @@ public class ConfigFileCheckUtil {
 		}		
 		if(!adbUseable){
 			System.out.println("请在AppiumServerConfig配置文件中配置正确的adbpath，非Windows操作系统请配置adbpath并确保其可用！");
-			return;
+			return false;
 		}
 		
 		//************************IOSSimulatorConfig*************************
@@ -76,29 +76,31 @@ public class ConfigFileCheckUtil {
 			if(iossimulatordevices.isEmpty()){
 				if(deviceamount < 1){
 					System.out.println("请在IOSSimulatorConfig配置文件中配置正确的deviceamount，设备总数至少是1！");
-					return;
+					return false;
 				}
 			}else{
 				//有一个设备可用即可
-				List<String> iOSSimulatorList = DeviceUtil.getIOSSimulatorListByConfig();
-				if(null==iOSSimulatorList){
+				//List<Device> iOSSimulatorList = DeviceUtil.getIOSSimulatorListByConfig();
+				List<Device> iOSSimulatorList = deviceList;
+				if(iOSSimulatorList.isEmpty()){
 					System.out.println("请在IOSSimulatorConfig配置文件中配置正确的iOSSimulatorDevices，详情请查看配置文件说明！");
-					return;
+					return false;
 				}
 				//是否包含重复
 				Map<String,Integer> count = new HashMap<>();
-				for (String iOSSimulator : iOSSimulatorList) {
-					if(count.containsKey(iOSSimulator)){
-						count.put(iOSSimulator, count.get(iOSSimulator).intValue()+1);
+				for (Device iOSSimulator : iOSSimulatorList) {
+					String deviceName = iOSSimulator.getDeviceName();
+					if(count.containsKey(deviceName)){
+						count.put(deviceName, count.get(deviceName).intValue()+1);
 					}else{
-						count.put(iOSSimulator, 1);
+						count.put(deviceName, 1);
 					}
 				}
 				ArrayList<Integer> list = new ArrayList<>(count.values());
 				for (Integer integer : list) {
 					if(integer>=2){
 						System.out.println("请在IOSSimulatorConfig配置文件中配置正确的iOSSimulatorDevices，不允许出现重复设备名称！");
-						return;
+						return false;
 					}
 				}
 			}						
@@ -109,28 +111,30 @@ public class ConfigFileCheckUtil {
 		boolean isPathTrue = whereistestcode.equals("main") || whereistestcode.equals("test");
 		if(whereistestcode.isEmpty() || !isPathTrue){
 			System.out.println("请在TestCaseConfig配置文件中配置正确的whereIsTestCode，必填，只能选test或main,且确保你的工程是标准的maven工程！");
-			return;
+			return false;
 		}
 		
 		//defaultPackage  必填，不支持多个包
 		String defaultexcgroup = TestCaseConfig.defaultExcGroup.trim();
 		if(defaultexcgroup.isEmpty()){
 			System.out.println("请在TestCaseConfig配置文件中配置正确的defaultExcGroup，此为必填项！");
-			return;
+			return false;
 		}
 		
 		//************************综合配置检查*************************
 		//是否存在已连接可用设备
 		if(client.equals("android")){
-			if(DeviceUtil.getAvailableAndroidDeviceList().isEmpty()){
+			if(deviceList.isEmpty()){
 				System.out.println("adb devices 当前未检测到已连接可用设备，请检查或重启adb（执行adb kill-server、adb start-server）！");
-				return;
+				return false;
 			}
 		}else{
-			if(DeviceUtil.getIOSDevices().isEmpty()){
+			if(deviceList.isEmpty()){
 				System.out.println("未获取到可用的iOS设备，请检查配置或usb连接是否正常！");
-				return;
+				return false;
 			}
 		}
+		
+		return true;
 	}
 }

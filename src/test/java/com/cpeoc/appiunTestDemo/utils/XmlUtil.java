@@ -30,13 +30,7 @@ public class XmlUtil {
 	
 	// 读取配置文件 client iOS铁定串行 Android另行判断
 	@SuppressWarnings("unused")
-	public static void creatTestNGXML() {
-		//配置文件基础校验
-		ConfigFileCheckUtil.checkAllConfigAvialable();
-		
-		// 生成device json
-		List<DeviceJsonBean> allDeviceJson = JsonUtil.createAllDeviceJson();
-
+	public static void creatTestNGXML(List<Device> deviceList) {
 		// 创建空实例
 		Document document = DocumentHelper.createDocument();
 
@@ -52,10 +46,11 @@ public class XmlUtil {
 		Element suite = document.addElement("suite");
 		// 属性 name = "AppiumTestDemo"
 		suite.addAttribute("name", projectName);
+		
 		// 判断parallel
-		if (parallel && ! isIOS ) {
+		if (parallel && !isIOS ) {
 			suite.addAttribute("parallel", "tests");
-			suite.addAttribute("thread-count", allDeviceJson.size() + "");
+			suite.addAttribute("thread-count", deviceList.size() + "");
 		}
 
 		// 用例分配 如果模块数量>= 设备数量 按模块分配；否则按class分配
@@ -65,11 +60,11 @@ public class XmlUtil {
 		List<String> moduleList = getAllModule();
 		
 		int moduleSize = moduleList.size();
-		int deviceSize = allDeviceJson.size();
+		int deviceSize = deviceList.size();
 		if (moduleSize >= deviceSize || isIOS) {
-			document = creatXMLByModule(allDeviceJson, suite, document);
+			document = creatXMLByModule(deviceList, suite, document);
 		} else {
-			document = creatXMLByClass(allDeviceJson, suite, document);
+			document = creatXMLByClass(deviceList, suite, document);
 		}
 		
 		// 文档中含有中文,设置编码格式写入的形式.
@@ -96,20 +91,20 @@ public class XmlUtil {
 	 * @see
 	 * 	1.读取配置defaultPackage下所有Class，返回List QualifiedName  </br>
 	 */
-	public static Document creatXMLByClass(List<DeviceJsonBean> allDeviceJson,
+	public static Document creatXMLByClass(List<Device> deviceList,
 			Element suite, Document document) {
 		
 		FileUtil fu = new FileUtil();
 		List<String> allTestCaseQualifiedNameList = fu.getAllTestCaseQualifiedName();
 		
 		//有一种极端情况  class数少于设备数
-		if(allDeviceJson.size()>allTestCaseQualifiedNameList.size() && !parallel){
+		if(deviceList.size()>allTestCaseQualifiedNameList.size() && !parallel){
 			//以数量少的为单位循环
 			for (int i=0;i<allTestCaseQualifiedNameList.size();i++) {
 				String testCaseQualifiedName = allTestCaseQualifiedNameList.get(i);
-				DeviceJsonBean deviceJsonBean = allDeviceJson.get(i);
+				Device device = deviceList.get(i);
 				//新增test  新增device info parameter
-				Element test = deviceIntoTestElement(deviceJsonBean,suite);
+				Element test = deviceIntoTestElement(device,suite);
 				
 				//添加classes
 				Element classes = test.addElement("classes");
@@ -121,9 +116,9 @@ public class XmlUtil {
 		}
 		
 		// suite下添加子节点
-		for (DeviceJsonBean deviceJsonBean : allDeviceJson) {
+		for (Device device : deviceList) {
 			//新增test  新增device info parameter
-			Element test = deviceIntoTestElement(deviceJsonBean,suite);
+			Element test = deviceIntoTestElement(device,suite);
 			
 			//添加classes
 			Element classes = test.addElement("classes");
@@ -136,12 +131,10 @@ public class XmlUtil {
 					cla.addAttribute("name", testCaseQualifiedName);
 				}
 			}else{
-				Map<String, List<String>> deviceClassMap = allotOfAverage(
-						DeviceUtil.getDeviceListFromDeviceJsonBeanList(allDeviceJson),
-						allTestCaseQualifiedNameList);
-				
-				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-				String deviceName = capabilities.getBrowserName();
+				List<String> deviceNameList = DeviceUtil.getDeviceNameList(deviceList);
+				Map<String, List<String>> deviceClassMap = allotOfAverage(deviceNameList,allTestCaseQualifiedNameList);
+	
+				String deviceName = device.getDeviceName();
 				List<String> testClassList = deviceClassMap.get(deviceName);			
 //				//防止class少于设备数时，部分设备没有分到class导致空指针异常
 //				if(null!=testClassList){
@@ -166,16 +159,16 @@ public class XmlUtil {
 	 * @param document
 	 *            文档
 	 */
-	public static Document creatXMLByModule(List<DeviceJsonBean> allDeviceJson,
+	public static Document creatXMLByModule(List<Device> deviceList,
 			Element suite, Document document) {
 		//获取平均分配
 		List<String> allModule = getAllModule();
-		List<String> deviceList = DeviceUtil.getDeviceListFromDeviceJsonBeanList(allDeviceJson);
-		Map<String, List<String>> deviceModuleMap = allotOfAverage(deviceList,allModule);
+		List<String> deviceNameList = DeviceUtil.getDeviceNameList(deviceList);
+		Map<String, List<String>> deviceModuleMap = allotOfAverage(deviceNameList,allModule);
 		// suite下添加子节点
-		for (DeviceJsonBean deviceJsonBean : allDeviceJson) {
+		for (Device device : deviceList) {
 			//新增test  新增device info parameter
-			Element test = deviceIntoTestElement(deviceJsonBean,suite);
+			Element test = deviceIntoTestElement(device,suite);
 
 			// 添加groups
 			String defaultexcgroup = TestCaseConfig.defaultExcGroup.trim();
@@ -208,9 +201,8 @@ public class XmlUtil {
 			
 			
 			//当parallel=false时，采用平均分配算法		
-			if(!parallel && !isIOS){
-				Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-				String deviceName = capabilities.getBrowserName();
+			if(!parallel && !isIOS){				
+				String deviceName = device.getDeviceName();
 				List<String> muduleList = deviceModuleMap.get(deviceName);
 				for (String module : muduleList) {
 					Element pkg = packages.addElement("package");
@@ -258,10 +250,9 @@ public class XmlUtil {
 	 * @param suite  suite节点Element
 	 * @return  test 节点Element
 	 */
-	public static Element deviceIntoTestElement(DeviceJsonBean deviceJsonBean,Element suite){
-		Capabilities capabilities = deviceJsonBean.getCapabilities().get(0);
-		Configuration configuration = deviceJsonBean.getConfiguration();
-		String deviceName = capabilities.getBrowserName();
+	public static Element deviceIntoTestElement(Device device,Element suite){
+
+		String deviceName = device.getDeviceName();
 		// 添加test节点
 		Element test = suite.addElement("test");
 		test.addAttribute("name", deviceName);
@@ -272,18 +263,16 @@ public class XmlUtil {
 		// 添加parameter platformVersion
 		Element parameter2 = test.addElement("parameter");
 		parameter2.addAttribute("name", "platformVersion");
-		parameter2.addAttribute("value", capabilities.getVersion());
+		parameter2.addAttribute("value", device.getSysVersion());
 		// 添加parameter port  iOS端口写hubport
 		Element parameter3 = test.addElement("parameter");
 		parameter3.addAttribute("name", "port");
 		if(!isIOS){
-			parameter3.addAttribute("value", configuration.getPort() + "");
+			parameter3.addAttribute("value", device.getServerPort() + "");
 		}else{
-			parameter3.addAttribute("value", configuration.getHubPort() + "");
+			parameter3.addAttribute("value", device.getBoostrapPort() + "");
 		}
-		
-		
-		
+
 		return test;
 	}	
 	
@@ -346,13 +335,6 @@ public class XmlUtil {
 		}
 		
 		return moduleList;
-	}
-
-	public static void main(String[] args) throws Exception {
-		// creatTestNGXML();  多设备测试一波  mac下测试一波
-		
-		creatTestNGXML();
-		//getModules();
 	}
 
 	/**
