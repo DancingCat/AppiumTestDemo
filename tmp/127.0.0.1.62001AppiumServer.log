@@ -1,0 +1,11 @@
+[Appium] Welcome to Appium v1.6.3
+[Appium] Non-default server args:
+[Appium]   address: '192.168.31.119'
+[Appium]   port: 9000
+[Appium]   bootstrapPort: 9003
+[Appium]   udid: '127.0.0.1:62001'
+[Appium] Deprecated server args:
+[Appium]   -U,--udid => --default-capabilities '{"udid":"127.0.0.1:62001"}'
+[Appium] Default capabilities, which will be added to each request unless overridden by desired capabilities:
+[Appium]   udid: '127.0.0.1:62001'
+[Appium] Appium REST http interface listener started on 192.168.31.119:9000

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="appiumTestDemo2" parallel="tests" thread-count="2">
+  <test name="127.0.0.1:62001">
+    <parameter name="deviceName" value="127.0.0.1:62001"/>
+    <parameter name="platformVersion" value="4.4"/>
+    <parameter name="port" value="9000"/>
+    <classes>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest"/>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.MyFirstTest"/>
+    </classes>
+  </test>
+  <test name="28a38e6f">
+    <parameter name="deviceName" value="28a38e6f"/>
+    <parameter name="platformVersion" value="5.1"/>
+    <parameter name="port" value="9002"/>
+    <classes>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest"/>
+      <class name="com.cpeoc.appiunTestDemo.test.yy.MyFirstTest"/>
+    </classes>
+  </test>
+</suite>

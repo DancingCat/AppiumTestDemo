@@ -1,80 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="1" passed="0">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="appiumTestDemo" duration-ms="35529" started-at="2017-08-14T02:59:00Z" finished-at="2017-08-14T02:59:36Z">
+  <suite name="Default suite" duration-ms="11123" started-at="2017-10-25T02:36:39Z" finished-at="2017-10-25T02:36:50Z">
     <groups>
     </groups>
-    <test name="fe3123d2" duration-ms="35529" started-at="2017-08-14T02:59:00Z" finished-at="2017-08-14T02:59:36Z">
-      <class name="com.cpeoc.appiunTestDemo.test.yy.BaseDriver">
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.cpeoc.appiunTestDemo.test.yy.BaseDriver@4f6ee6e4]" name="setUp" is-config="true" duration-ms="13409" started-at="2017-08-14T10:59:00Z" finished-at="2017-08-14T10:59:14Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[fe3123d2]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[6.0]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[9000]]>
-              </value>
-            </param>
-          </params>
+    <test name="Default test" duration-ms="11123" started-at="2017-10-25T02:36:39Z" finished-at="2017-10-25T02:36:50Z">
+      <class name="com.cpeoc.appiunTestDemo.conf.TestRunner">
+        <test-method status="PASS" signature="startServer()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="startServer" is-config="true" duration-ms="10535" started-at="2017-10-25T10:36:39Z" finished-at="2017-10-25T10:36:49Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.cpeoc.appiunTestDemo.test.yy.BaseDriver@4f6ee6e4]" name="tearDown" is-config="true" duration-ms="2550" started-at="2017-08-14T10:59:33Z" finished-at="2017-08-14T10:59:36Z">
+        </test-method> <!-- startServer -->
+        <test-method status="PASS" signature="excTestngXml()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="excTestngXml" duration-ms="164" started-at="2017-10-25T10:36:49Z" finished-at="2017-10-25T10:36:49Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.BaseDriver -->
-      <class name="com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver">
-        <test-method status="FAIL" signature="test()[pri:0, instance:com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver@4466af20]" name="test" duration-ms="9" started-at="2017-08-14T10:59:14Z" finished-at="2017-08-14T10:59:14Z">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[null]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: null
-	at org.testng.Assert.fail(Assert.java:94)
-	at org.testng.Assert.fail(Assert.java:101)
-	at com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver.test(TestBaseDriver.java:18)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:86)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:643)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
-	at org.testng.TestRunner.privateRun(TestRunner.java:782)
-	at org.testng.TestRunner.run(TestRunner.java:632)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1244)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
-	at org.testng.TestNG.run(TestNG.java:1064)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+        </test-method> <!-- excTestngXml -->
+        <test-method status="PASS" signature="stopServer()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="stopServer" is-config="true" duration-ms="415" started-at="2017-10-25T10:36:49Z" finished-at="2017-10-25T10:36:50Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test -->
-      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.TestBaseDriver -->
-    </test> <!-- fe3123d2 -->
-  </suite> <!-- appiumTestDemo -->
+        </test-method> <!-- stopServer -->
+      </class> <!-- com.cpeoc.appiunTestDemo.conf.TestRunner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

@@ -30,7 +30,7 @@ public interface AppiumServerConfig {
 	/** adb完整路径，Mac必填，Windows可不填，确保当前用户对adb有可执行权限 */
 	String adbPath="/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/adb";
 	
-	/**  selenium hub以及appium server启动超时时间，单位毫秒 */
-	int serverStartUpTimeOut = 8000;
+	/**  selenium hub以及appium server启动超时时间，单位毫秒；首次启动可能时间稍长 */
+	int serverStartUpTimeOut = 10000;
 	
 }

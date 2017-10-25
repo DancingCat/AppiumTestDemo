@@ -92,7 +92,7 @@ public class AppiumServerUtil {
 						int hub = PortUtil.getPidByPort(servertPort);
 						serverPID.add(hub);
 						System.out.println(deviceName + " appium server启动成功！");
-						break;
+						break ;
 					}
 					long endTime = System.currentTimeMillis();
 					if((endTime-startTime)>AppiumServerConfig.serverStartUpTimeOut){

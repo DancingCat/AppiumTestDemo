@@ -7,9 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+
 
 import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
 import com.cpeoc.appiunTestDemo.utils.DeviceUtil;

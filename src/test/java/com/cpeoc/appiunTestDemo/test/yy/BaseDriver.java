@@ -8,10 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.internal.TestResult;
 
 import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
+import com.cpeoc.appiunTestDemo.utils.AppiumServerUtil;
 import com.cpeoc.appiunTestDemo.utils.DeviceUtil;
 import com.cpeoc.appiunTestDemo.utils.TestNGListener;
 
@@ -33,6 +36,20 @@ public class BaseDriver {
 	public  AppiumDriver<WebElement> getDriver(){
 		return this.driver;
 	}
+	
+	@BeforeSuite
+	public void startAppiumServer(){
+		try {
+			boolean isStartSuc = AppiumServerUtil.startAppiumServer();
+//			if(){
+//				TestResult.this.set
+//			}
+		} catch (Exception e) {
+			System.out.println("服务端启动失败!错误信息头："+e.getMessage());
+		}
+		
+	}
+	
 	@Parameters({"deviceName","platformVersion","port"})
 	@BeforeTest
 	public void setUp(String deviceName,String platformVersion,String port) throws Exception {
@@ -45,7 +62,7 @@ public class BaseDriver {
 		capabilities.setCapability("platformVersion", platformVersion);
 		capabilities.setCapability("app", app.getAbsolutePath());
 		capabilities.setCapability("appPackage", "com.netease.cloudalbum");
-		capabilities.setCapability("platformName", "Android");
+		
 		// capabilities.setCapability("noReset", true);
 		//iOS配置 realDevice
 		if(client.equals("ios")){
@@ -54,6 +71,8 @@ public class BaseDriver {
 			if(realDevice){
 				capabilities.setCapability("udid", DeviceUtil.getIOSRealDeviceUdidByDeviceName(deviceName));
 			}
+		}else{
+			capabilities.setCapability("platformName", "Android");
 		}
 		
 		driver = new AppiumDriver<>(new URL("http://127.0.0.1:"+port+"/wd/hub"),

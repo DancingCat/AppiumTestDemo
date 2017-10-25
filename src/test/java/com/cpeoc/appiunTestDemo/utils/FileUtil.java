@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.cpeoc.appiunTestDemo.conf.TestCaseConfig;
 
@@ -61,17 +62,22 @@ public class FileUtil {
 				String[] splitPkgs = TestCaseConfig.excludePackages.split(",");
 				boolean containExcludeGroups = false;
 				boolean containExcludePkgs = false;
-				for (String pkg : splitPkgs) {
-					if(readFileToString.contains(pkg)){
-						containExcludePkgs = true;
+				//不等于空			
+				if(!StringUtils.isAnyEmpty(splitPkgs)){
+					for (String pkg : splitPkgs) {
+						if(readFileToString.contains(pkg)){
+							containExcludePkgs = true;
+						}
 					}
 				}
-				for (String group : splitGroups) {
-					if(readFileToString.contains(group)){
-						containExcludeGroups = true;
+				if(!StringUtils.isAnyEmpty(splitGroups)){
+					for (String group : splitGroups) {
+						if(readFileToString.contains(group)){
+							containExcludeGroups = true;
+						}
 					}
 				}
-				
+			
 				if(readFileToString.contains("@Test") && !containExcludeGroups && !containExcludePkgs){
 					InputStreamReader read = new InputStreamReader(new FileInputStream(jFile), "UTF-8");
 					BufferedReader bufferedReader = new BufferedReader(read);
