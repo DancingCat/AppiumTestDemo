@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.support.PageFactory;
 
-import com.cpeoc.appiunTestDemo.test.yy.BaseDriver;
+import com.cpeoc.appiunTestDemo.utils.BaseDriver;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
