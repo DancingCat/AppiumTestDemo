@@ -26,4 +26,8 @@
 	3.appium需要支持命令行,建议使用1.6以上版本
 	4.需要安装的xxx
 	
+	5.运行方式（为了方便集成allure）
+	    先运行utils下的testng.xml来生成工程需要的testng.xml（tmp目录下）
+	    运行tmp\testng.xml
+	
 	
