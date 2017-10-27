@@ -1,31 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="2" name="Failed suite [appiumTestDemo2]" parallel="tests">
-  <parameter name="port" value="9003"/>
-  <parameter name="platformVersion" value="5.1"/>
-  <parameter name="deviceName" value="28a38e6f"/>
+<suite thread-count="1" name="Failed suite [appiumTestDemo2]" parallel="tests">
+  <parameter name="port" value="9000"/>
+  <parameter name="platformVersion" value="4.4"/>
+  <parameter name="deviceName" value="127.0.0.1:62001"/>
   <test name="127.0.0.1:62001(failed)" parallel="tests">
     <parameter name="port" value="9000"/>
     <parameter name="platformVersion" value="4.4"/>
     <parameter name="deviceName" value="127.0.0.1:62001"/>
     <classes>
-      <class name="com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest">
+      <class name="com.cpeoc.appiunTestDemo.test.TestCase2">
         <methods>
-          <include name="test006"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="swipeIntoHome"/>
+          <include name="stopAppiumServer"/>
+          <include name="startAppiumServer"/>
         </methods>
-      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest -->
+      </class> <!-- com.cpeoc.appiunTestDemo.test.TestCase2 -->
     </classes>
   </test> <!-- 127.0.0.1:62001(failed) -->
-  <test name="28a38e6f(failed)" parallel="tests">
-    <parameter name="port" value="9003"/>
-    <parameter name="platformVersion" value="5.1"/>
-    <parameter name="deviceName" value="28a38e6f"/>
-    <classes>
-      <class name="com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest">
-        <methods>
-          <include name="test006"/>
-        </methods>
-      </class> <!-- com.cpeoc.appiunTestDemo.test.yy.CopyOfMyFirstTest -->
-    </classes>
-  </test> <!-- 28a38e6f(failed) -->
 </suite> <!-- Failed suite [appiumTestDemo2] -->

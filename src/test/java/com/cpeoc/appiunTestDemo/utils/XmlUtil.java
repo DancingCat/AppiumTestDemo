@@ -31,6 +31,16 @@ public class XmlUtil {
 	// 读取配置文件 client iOS铁定串行 Android另行判断
 	@SuppressWarnings("unused")
 	public static void creatTestNGXML(List<Device> deviceList) {
+		
+//		// 创建临时文件夹tmp
+		File tmp = new File("tmp");
+		if (tmp.exists()) {
+			FileUtil fu = new FileUtil();
+			fu.deleteFile(tmp);
+		}
+		tmp.mkdir();
+		
+		
 		// 创建空实例
 		Document document = DocumentHelper.createDocument();
 

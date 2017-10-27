@@ -7,11 +7,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-import org.testng.internal.TestResult;
 
 import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
 import com.cpeoc.appiunTestDemo.utils.AppiumServerUtil;
@@ -37,18 +38,45 @@ public class BaseDriver {
 		return this.driver;
 	}
 	
+	
+	@BeforeSuite
+	public void startAppiumServer() {
+		try {
+			boolean startAppiumServer = AppiumServerUtil.startAppiumServer();
+			if(!startAppiumServer){
+				Assert.assertTrue(false,"appium Server启动失败！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false,"appium Server启动失败！");
+		}		
+	}
+	
+	@AfterSuite(alwaysRun = true)
+	public void stopAppiumServer(){
+		try {
+			boolean stopAppiumServer = AppiumServerUtil.stopAppiumServer();
+			if(!stopAppiumServer){
+				Assert.assertTrue(false,"appium Server停止失败！");
+			}
+		} catch (Exception e) {
+			Assert.assertTrue(false,"appium Server停止失败！");
+		}	
+	}
+	
+	
 	@Parameters({"deviceName","platformVersion","port"})
 	@BeforeTest
 	public void setUp(String deviceName,String platformVersion,String port) throws Exception {
 		
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "app");
-		File app = new File(appDir, "Album_netease.apk");
+		File app = new File(appDir, "Shop.apk");
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability("deviceName", deviceName); // "Android Emulator"
 		capabilities.setCapability("platformVersion", platformVersion);
 		capabilities.setCapability("app", app.getAbsolutePath());
-		capabilities.setCapability("appPackage", "com.netease.cloudalbum");
+		capabilities.setCapability("appPackage", "cn.swiftpass.wftpay");
 		
 		// capabilities.setCapability("noReset", true);
 		//iOS配置 realDevice
@@ -60,16 +88,13 @@ public class BaseDriver {
 			}
 		}else{
 			capabilities.setCapability("platformName", "Android");
-		}
-		
-		driver = new AppiumDriver<>(new URL("http://127.0.0.1:"+port+"/wd/hub"),
+		}	
+		driver = new AppiumDriver<>(new URL("http://"+AppiumServerConfig.serverHost+":"+port+"/wd/hub"),
 				capabilities);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		//设置等待时间30s
-		wait = new WebDriverWait(driver,30);
-		
-		TestNGListener.driver = driver;
-		
+		wait = new WebDriverWait(driver,30);	
+		//TestNGListener.driver = driver;
 	}
 
 	@AfterTest(alwaysRun = true)

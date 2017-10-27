@@ -33,7 +33,7 @@ public class TestNGListener extends TestListenerAdapter {
     }
 
 	public void takeScreenShot(ITestResult tr) {
-		
+
 		File screenshotFile = driver.getScreenshotAs(OutputType.FILE);
 
 		try {

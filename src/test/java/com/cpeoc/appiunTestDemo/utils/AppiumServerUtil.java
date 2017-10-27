@@ -40,14 +40,14 @@ public class AppiumServerUtil {
 	public static boolean startAppiumServer() throws InterruptedException {
 		
 		String serverhost = AppiumServerConfig.serverHost;
-		
-		// 创建临时文件夹tmp
-		File tmp = new File("tmp");
-		if (tmp.exists()) {
-			FileUtil fu = new FileUtil();
-			fu.deleteFile(tmp);
-		}
-		tmp.mkdir();
+//		转到XMLUtil		
+//		// 创建临时文件夹tmp
+//		File tmp = new File("tmp");
+//		if (tmp.exists()) {
+//			FileUtil fu = new FileUtil();
+//			fu.deleteFile(tmp);
+//		}
+//		tmp.mkdir();
 		
 		if(!isIOS){
 			//获取所有安卓设备
@@ -56,18 +56,17 @@ public class AppiumServerUtil {
 			if(!ConfigFileCheckUtil.checkAllConfigAvialable(deviceList)){
 				return false;
 			}
-			//生成testNGXML配置文件
-			XmlUtil.creatTestNGXML(deviceList);
-			
-			
 			if (deviceList.isEmpty()) {
 				System.out.println("系统无可用移动设备，请检查配置文件和设备连接情况！！");
 				return false;
 			}
-	
+			
+			//生成testNGXML配置文件
+			//XmlUtil.creatTestNGXML(deviceList);
+									
 			// 分别启动appium server 保存log 并返回PID
 			for (Device device : deviceList) {	
-				
+				System.out.println("开始启动appium server ");
 				String deviceName = device.getDeviceName();
 				int servertPort = device.getServerPort();
 				int bsPort = device.getBoostrapPort();
@@ -82,8 +81,7 @@ public class AppiumServerUtil {
 				s.start();
 				
 				System.out.println("运行命令："+cmd);
-				System.out.println("appium server启动中~~~~");
-				
+				System.out.println("appium server启动中~~~~");				
 				long startTime = System.currentTimeMillis();
 				while(true){
 					Thread.sleep(2000);
@@ -98,8 +96,9 @@ public class AppiumServerUtil {
 					if((endTime-startTime)>AppiumServerConfig.serverStartUpTimeOut){
 						System.out.println("appium server 启动失败！设备名：" + deviceName.replaceAll(":", ".")
 								+ "端口号：" + servertPort);
-						stopAppiumServer();
-						break;
+						stopAppiumServer();	
+						//break;
+						return false;
 					}
 				}
 			}
@@ -112,8 +111,12 @@ public class AppiumServerUtil {
 			if(!ConfigFileCheckUtil.checkAllConfigAvialable(deviceList)){				
 				return false;
 			}
+			if (deviceList.isEmpty()) {
+				System.out.println("系统无可用移动设备，请检查配置文件和设备连接情况！！");
+				return false;
+			}
 			//生成testNGXML配置文件
-			XmlUtil.creatTestNGXML(deviceList);
+			//XmlUtil.creatTestNGXML(deviceList);
 			
 			Device de = deviceList.get(0);
 			int serverPort = de.getServerPort();
@@ -163,26 +166,8 @@ public class AppiumServerUtil {
 				return false;
 			}
 		}
-		
 		return true;	
 	}	
-	
-	public static void main(String[] args) throws InterruptedException {
-		try {
-			startAppiumServer();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}finally{
-			stopAppiumServer();
-		}
-		
-//		long s = System.currentTimeMillis();
-//		
-//		Thread.sleep(2000);
-//		long e = System.currentTimeMillis();
-//		System.out.println(e-s);
-	}
-	
 
 }
 /***

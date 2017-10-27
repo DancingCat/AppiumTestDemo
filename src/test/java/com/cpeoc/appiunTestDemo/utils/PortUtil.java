@@ -27,7 +27,7 @@ public class PortUtil {
 			String cmdStr = System.getProperty("os.name").contains("Windows") ? "findstr"
 					: "grep";
 			ports = CmdUtil.getInstance().execCmd(
-					"netstat -an|" + cmdStr + " " + portNum);
+					"netstat -ano|" + cmdStr + " " + portNum);
 			return ports.size() > 0 ? true : false;
 		} catch (Exception e) {
 			System.out.println("获取端口占用情况失败!=");

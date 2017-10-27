@@ -2,10 +2,356 @@
 [Appium] Non-default server args:
 [Appium]   address: '192.168.31.119'
 [Appium]   port: 9000
-[Appium]   bootstrapPort: 9003
+[Appium]   bootstrapPort: 9018
 [Appium]   udid: '127.0.0.1:62001'
 [Appium] Deprecated server args:
 [Appium]   -U,--udid => --default-capabilities '{"udid":"127.0.0.1:62001"}'
 [Appium] Default capabilities, which will be added to each request unless overridden by desired capabilities:
 [Appium]   udid: '127.0.0.1:62001'
 [Appium] Appium REST http interface listener started on 192.168.31.119:9000
+[HTTP] --> POST /wd/hub/session {"capabilities":[{"desiredCapabilities":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001"}},{"requiredCapabilities":{}}],"desiredCapabilities":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001"},"requiredCapabilities":{}}
+[debug] [MJSONWP] Calling AppiumDriver.createSession() with args: [{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001"},{},[{"desiredCapabilities":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001"}},{"requiredCapabilities":{}}],null,null]
+[Appium] Creating new AndroidDriver session
+[Appium] Capabilities:
+[Appium]   app: 'C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk'
+[Appium]   appPackage: 'cn.swiftpass.wftpay'
+[Appium]   platformVersion: '4.4'
+[Appium]   platformName: 'Android'
+[Appium]   deviceName: '127.0.0.1:62001'
+[Appium]   udid: '127.0.0.1:62001'
+[debug] [AndroidDriver] AndroidDriver version: 1.11.3
+[BaseDriver] Session created with session id: b534de08-3af8-47e8-acbe-73ad907ed169
+[debug] [AndroidDriver] Getting Java version
+[AndroidDriver] Java version is: 1.8.0_131
+[ADB] Checking whether adb is present
+[ADB] Using adb.exe from E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe
+[AndroidDriver] Retrieving device list
+[debug] [ADB] Trying to find a connected android device
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[AndroidDriver] Using device: 127.0.0.1:62001
+[ADB] Checking whether adb is present
+[ADB] Using adb.exe from E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe
+[debug] [ADB] Setting device id to 127.0.0.1:62001
+[BaseDriver] Using local app 'C:\Users\kk\Desktop\eclipse\appiumTestDemo2\app\Shop.apk'
+[debug] [AndroidDriver] Checking whether app is actually present
+[AndroidDriver] Starting Android session
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","wait-for-device"]
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","echo","ping"]
+[debug] [Logcat] Starting logcat capture
+[debug] [AndroidDriver] Pushing settings apk to device...
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","install","C:\\Users\\kk\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\.2.1.0@io.appium.settings\\bin\\settings_apk-debug.apk"]
+[debug] [AndroidDriver] Pushing unlock helper app to device...
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","install","C:\\Users\\kk\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\.0.1.1@appium-unlock\\bin\\unlock_apk-debug.apk"]
+[ADB] Getting device platform version
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","getprop","ro.build.version.release"]
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","wm","size"]
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","getprop","ro.product.model"]
+[debug] [ADB] Current device property 'ro.product.model': MX4
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","getprop","ro.product.manufacturer"]
+[debug] [ADB] Current device property 'ro.product.manufacturer': Meizu
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","dumpsys","window"]
+[AndroidDriver] Screen already unlocked, doing nothing
+[debug] [AndroidDriver] Parsing package and activity from app manifest
+[ADB] Checking whether aapt is present
+[ADB] Using aapt.exe from E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\build-tools\android-4.4W\aapt.exe
+[ADB] Extracting package and launch activity from manifest
+[debug] [ADB] badging package: cn.swiftpass.wftpay
+[debug] [ADB] badging act: com.cpeoc.shop.ui.WelcomeActivity
+[debug] [AndroidDriver] Parsed package and activity are: cn.swiftpass.wftpay/com.cpeoc.shop.ui.WelcomeActivity
+[AndroidDriver] Remote apk path is /data/local/tmp/6e793c6b43ce5c5ccb359864d6478872.apk
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","ls","/data/local/tmp/6e793c6b43ce5c5ccb359864d6478872.apk"]
+[debug] [AndroidDriver] Checking if app is installed
+[debug] [ADB] Getting install status for cn.swiftpass.wftpay
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","pm","list","packages","cn.swiftpass.wftpay"]
+[debug] [ADB] App is installed
+[AndroidDriver] Apk is already on remote and installed, resetting
+[debug] [AndroidDriver] Running fast reset (stop and clear)
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","am","force-stop","cn.swiftpass.wftpay"]
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","pm","clear","cn.swiftpass.wftpay"]
+[debug] [AndroidDriver] Extracting strings from apk C:\Users\kk\Desktop\eclipse\appiumTestDemo2\app\Shop.apk null C:\Users\kk\AppData\Local\Temp\cn.swiftpass.wftpay
+[debug] [ADB] Extracting strings for language: default
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","getprop","ro.build.version.sdk"]
+[debug] [ADB] Device API level: 19
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","getprop","persist.sys.language"]
+[debug] [ADB] Current device property 'persist.sys.language': zh
+[debug] [ADB] Reading strings from converted strings.json
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","push","C:\\Users\\kk\\AppData\\Local\\Temp\\cn.swiftpass.wftpay\\strings.json","/data/local/tmp"]
+[debug] [AndroidBootstrap] Watching for bootstrap disconnect
+[debug] [ADB] Forwarding system: 9018 to device: 4724
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","forward","tcp:9018","tcp:4724"]
+[debug] [UiAutomator] Starting UiAutomator
+[debug] [UiAutomator] Moving to state 'starting'
+[debug] [UiAutomator] Parsing uiautomator jar
+[debug] [UiAutomator] Found jar name: 'AppiumBootstrap.jar'
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","push","C:\\Users\\kk\\AppData\\Roaming\\npm\\node_modules\\appium\\node_modules\\.2.7.9@appium-android-bootstrap\\bootstrap\\bin\\AppiumBootstrap.jar","/data/local/tmp/"]
+[debug] [ADB] Attempting to kill all uiautomator processes
+[debug] [ADB] Getting all processes with uiautomator
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","ps"]
+[ADB] No uiautomator process found to kill, continuing...
+[debug] [UiAutomator] Starting UIAutomator
+[debug] [ADB] Creating ADB subprocess with args: ["-P",5037,"-s","127.0.0.1:62001","shell","uiautomator","runtest","AppiumBootstrap.jar","-c","io.appium.android.bootstrap.Bootstrap","-e","pkg","cn.swiftpass.wftpay","-e","disableAndroidWatchers",false,"-e","acceptSslCerts",false]
+[debug] [UiAutomator] Moving to state 'online'
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] json loading complete.
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Registered crash watchers.
+[AndroidBootstrap] Android bootstrap socket is now connected
+[debug] [ADB] Device API level: 19
+[debug] [ADB] Getting connected devices...
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Client connected
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","am","start","-W","-n","cn.swiftpass.wftpay/com.cpeoc.shop.ui.WelcomeActivity","-S","-a","android.intent.action.MAIN","-c","android.intent.category.LAUNCHER","-f","0x10200000"]
+[debug] [ADB] Waiting for pkg: 'cn.swiftpass.wftpay' and activity: 'com.cpeoc.shop.ui.WelcomeActivity' to be focused
+[debug] [ADB] Possible activities, to be checked: com.cpeoc.shop.ui.WelcomeActivity, cn.swiftpass.wftpay.com.cpeoc.shop.ui.WelcomeActivity
+[debug] [ADB] Getting focused package and activity
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","dumpsys","window","windows"]
+[debug] [ADB] Found package: 'cn.swiftpass.wftpay' and fully qualified activity name : 'com.cpeoc.shop.ui.WelcomeActivity'
+[Appium] New AndroidDriver session created successfully, session b534de08-3af8-47e8-acbe-73ad907ed169 added to master session list
+[debug] [MJSONWP] Responding to client with driver.createSession() result: {"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001"},"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4.2","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001","deviceUDID":"127.0.0.1:62001","deviceScreenSize":"900x1440","deviceModel":"MX4","deviceManufacturer":"Meizu","appWaitPackage":"cn.swiftpass.wftpay","appActivity":"com.cpeoc.shop.ui.WelcomeActivity","appWaitActivity":"com.cpeoc.shop.ui.WelcomeActivity"}
+[HTTP] <-- POST /wd/hub/session 200 11469 ms - 958 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 {}
+[debug] [MJSONWP] Calling AppiumDriver.getSession() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [MJSONWP] Responding to client with driver.getSession() result: {"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001"},"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4.2","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001","deviceUDID":"127.0.0.1:62001","deviceScreenSize":"900x1440","deviceModel":"MX4","deviceManufacturer":"Meizu","appWaitPackage":"cn.swiftpass.wftpay","appActivity":"com.cpeoc.shop.ui.WelcomeActivity","appWaitActivity":"com.cpeoc.shop.ui.WelcomeActivity"}
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 200 3 ms - 958 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 {}
+[debug] [MJSONWP] Calling AppiumDriver.getSession() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [MJSONWP] Responding to client with driver.getSession() result: {"platform":"LINUX","webStorageEnabled":false,"takesScreenshot":true,"javascriptEnabled":true,"databaseEnabled":false,"networkConnectionEnabled":true,"locationContextEnabled":false,"warnings":{},"desired":{"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001"},"app":"C:\\Users\\kk\\Desktop\\eclipse\\appiumTestDemo2\\app\\Shop.apk","appPackage":"cn.swiftpass.wftpay","platformVersion":"4.4.2","platformName":"Android","deviceName":"127.0.0.1:62001","udid":"127.0.0.1:62001","deviceUDID":"127.0.0.1:62001","deviceScreenSize":"900x1440","deviceModel":"MX4","deviceManufacturer":"Meizu","appWaitPackage":"cn.swiftpass.wftpay","appActivity":"com.cpeoc.shop.ui.WelcomeActivity","appWaitActivity":"com.cpeoc.shop.ui.WelcomeActivity"}
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 200 2 ms - 958 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":30000}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",30000,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 30000ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 2 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":0}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",0,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 0ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 1 ms - 76 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context {}
+[debug] [MJSONWP] Calling AppiumDriver.getCurrentContext() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [MJSONWP] Responding to client with driver.getCurrentContext() result: "NATIVE_APP"
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context 200 3 ms - 84 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element {"using":"id","value":"guide_pager"}
+[debug] [MJSONWP] Calling AppiumDriver.findElement() with args: ["id","guide_pager","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Waiting up to 0 ms for condition
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"guide_pager","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"guide_pager","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: find
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Finding 'guide_pager' using 'ID' with the contextId: '' multiple: false
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Using: UiSelector[INSTANCE=0, RESOURCE_ID=cn.swiftpass.wftpay:id/guide_pager]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":{"ELEMENT":"1"},"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.findElement() result: {"ELEMENT":"1"}
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element 200 12 ms - 87 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":5000}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",5000,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 5000ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 1 ms - 76 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/1/displayed {}
+[debug] [MJSONWP] Calling AppiumDriver.elementDisplayed() with args: ["1","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"element:getAttribute","params":{"attribute":"displayed","elementId":"1"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"element:getAttribute","params":{"attribute":"displayed","elementId":"1"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: getAttribute
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":"true","status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.elementDisplayed() result: true
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/1/displayed 200 8 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform {"actions":[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}]}
+[debug] [MJSONWP] Calling AppiumDriver.performTouch() with args: [[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}],"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: swipe
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=400.0, y=800.0] to [x=100.0, y=800.0] with steps: 6
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":true,"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.performTouch() result: true
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform 200 108 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform {"actions":[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}]}
+[debug] [MJSONWP] Calling AppiumDriver.performTouch() with args: [[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}],"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: swipe
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=400.0, y=800.0] to [x=100.0, y=800.0] with steps: 6
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":true,"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.performTouch() result: true
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform 200 189 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform {"actions":[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}]}
+[debug] [MJSONWP] Calling AppiumDriver.performTouch() with args: [[{"action":"press","options":{"x":400,"y":800}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":100,"y":800}},{"action":"release","options":{}}],"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"swipe","params":{"startX":400,"startY":800,"endX":100,"endY":800,"steps":6}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: swipe
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][900,1440]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=400.0, y=800.0] to [x=100.0, y=800.0] with steps: 6
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":true,"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.performTouch() result: true
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/touch/perform 200 128 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":0}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",0,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 0ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 2 ms - 76 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context {}
+[debug] [MJSONWP] Calling AppiumDriver.getCurrentContext() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [MJSONWP] Responding to client with driver.getCurrentContext() result: "NATIVE_APP"
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context 200 2 ms - 84 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element {"using":"xpath","value":"//*[contains(@text,'开启邮惠之旅')]"}
+[debug] [MJSONWP] Calling AppiumDriver.findElement() with args: ["xpath","//*[contains(@text,'开启邮惠之旅')]","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Waiting up to 0 ms for condition
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"find","params":{"strategy":"xpath","selector":"//*[contains(@text,'开启邮惠之旅')]","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"find","params":{"strategy":"xpath","selector":"//*[contains(@text,'开启邮惠之旅')]","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: find
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Finding '//*[contains(@text,'开启邮惠之旅')]' using 'XPATH' with the contextId: '' multiple: false
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Using: UiSelector[CLASS=android.widget.TextView, INSTANCE=0]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":{"ELEMENT":"2"},"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.findElement() result: {"ELEMENT":"2"}
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element 200 743 ms - 87 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":5000}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",5000,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 5000ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 2 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/2/click {"id":"2"}
+[debug] [MJSONWP] Calling AppiumDriver.click() with args: ["2","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"element:click","params":{"elementId":"2"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"element:click","params":{"elementId":"2"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: click
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":true,"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.click() result: true
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/2/click 200 294 ms - 76 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":0}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",0,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 0ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 2 ms - 76 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context {}
+[debug] [MJSONWP] Calling AppiumDriver.getCurrentContext() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [MJSONWP] Responding to client with driver.getCurrentContext() result: "NATIVE_APP"
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/context 200 1 ms - 84 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element {"using":"id","value":"message"}
+[debug] [MJSONWP] Calling AppiumDriver.findElement() with args: ["id","message","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Valid locator strategies for this request: xpath, id, class name, accessibility id, -android uiautomator
+[debug] [BaseDriver] Waiting up to 0 ms for condition
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"message","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"find","params":{"strategy":"id","selector":"message","context":"","multiple":false}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: find
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Finding 'message' using 'ID' with the contextId: '' multiple: false
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Using: UiSelector[INSTANCE=0, RESOURCE_ID=cn.swiftpass.wftpay:id/message]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Using: UiSelector[INSTANCE=0, RESOURCE_ID=android:id/message]
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":{"ELEMENT":"3"},"status":0}
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.findElement() result: {"ELEMENT":"3"}
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element 200 997 ms - 87 
+[HTTP] --> POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts {"type":"implicit","ms":5000}
+[debug] [MJSONWP] Calling AppiumDriver.timeouts() with args: ["implicit",5000,"b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [BaseDriver] Set implicit wait to 5000ms
+[debug] [MJSONWP] Responding to client with driver.timeouts() result: null
+[HTTP] <-- POST /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/timeouts 200 4 ms - 76 
+[HTTP] --> GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/3/displayed {}
+[debug] [MJSONWP] Calling AppiumDriver.elementDisplayed() with args: ["3","b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"action","action":"element:getAttribute","params":{"attribute":"displayed","elementId":"3"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"action","action":"element:getAttribute","params":{"attribute":"displayed","elementId":"3"}}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type ACTION
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command action: getAttribute
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [MJSONWP] Responding to client with driver.elementDisplayed() result: true
+[HTTP] <-- GET /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169/element/3/displayed 200 6 ms - 76 
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":"true","status":0}
+[HTTP] --> DELETE /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 {}
+[debug] [MJSONWP] Calling AppiumDriver.deleteSession() with args: ["b534de08-3af8-47e8-acbe-73ad907ed169"]
+[debug] [AndroidDriver] Shutting down Android driver
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","am","force-stop","cn.swiftpass.wftpay"]
+[debug] [ADB] Pressing the HOME button
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","input","keyevent",3]
+[debug] [AndroidBootstrap] Sending command to android: {"cmd":"shutdown"}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got data from client: {"cmd":"shutdown"}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Got command of type SHUTDOWN
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Returning result: {"value":"OK, shutting down","status":0}
+[AndroidBootstrap] [BOOTSTRAP LOG] [debug] Closed client connection
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: numtests=1
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: stream=.
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: id=UiAutomatorTestRunner
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: test=testRunServer
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: class=io.appium.android.bootstrap.Bootstrap
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: current=1
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS_CODE: 0
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS: stream=
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] Test results for WatcherResultPrinter=.
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] Time: 7.454
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] OK (1 test)
+[debug] [AndroidBootstrap] [UIAUTO STDOUT] INSTRUMENTATION_STATUS_CODE: -1
+[debug] [AndroidBootstrap] Received command result from bootstrap
+[debug] [UiAutomator] Shutting down UiAutomator
+[debug] [UiAutomator] Moving to state 'stopping'
+[debug] [UiAutomator] UiAutomator shut down normally
+[debug] [UiAutomator] Moving to state 'stopped'
+[debug] [ADB] Attempting to kill all uiautomator processes
+[debug] [ADB] Getting all processes with uiautomator
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","ps"]
+[ADB] No uiautomator process found to kill, continuing...
+[debug] [UiAutomator] Moving to state 'stopped'
+[debug] [ADB] Getting connected devices...
+[debug] [ADB] 1 device(s) connected
+[debug] [ADB] Running 'E:\adt-bundle-windows-x86_64-20140702\adt-bundle-windows-x86_64-20140702\sdk\platform-tools\adb.exe' with args: ["-P",5037,"-s","127.0.0.1:62001","shell","am","force-stop","io.appium.unlock"]
+[debug] [Logcat] Stopping logcat capture
+[debug] [AndroidDriver] Not cleaning generated files. Add `clearSystemFiles` capability if wanted.
+[Appium] Removing session b534de08-3af8-47e8-acbe-73ad907ed169 from our master session list
+[debug] [MJSONWP] Received response: null
+[debug] [MJSONWP] But deleting session, so not returning
+[debug] [MJSONWP] Responding to client with driver.deleteSession() result: null
+[HTTP] <-- DELETE /wd/hub/session/b534de08-3af8-47e8-acbe-73ad907ed169 200 2281 ms - 76 

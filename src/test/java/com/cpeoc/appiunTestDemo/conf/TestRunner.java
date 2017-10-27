@@ -37,14 +37,16 @@ public class TestRunner {
 	
 	/**
 	 * 运行tesng.xml
+	 * @throws ClassNotFoundException 
 	 */
 	@Test
-	public void excTestngXml(){
+	public void excTestngXml() throws ClassNotFoundException{
 		
 		TestNG testNG = new TestNG();
 		List<String> suites = new ArrayList<String>();
 		suites.add(System.getProperty("user.dir")+File.separator+"tmp"+File.separator+"testng.xml");
 		testNG.setTestSuites(suites);
+
 		testNG.setOutputDirectory("tmp"+File.separator+"test-output");
 		testNG.run();
 
@@ -59,5 +61,6 @@ public class TestRunner {
 			Assert.fail("服务端关闭失败！");
 		}
 	}
+
 	
 }

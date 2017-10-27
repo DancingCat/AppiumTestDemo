@@ -2,24 +2,49 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11123" started-at="2017-10-25T02:36:39Z" finished-at="2017-10-25T02:36:50Z">
+  <suite name="appiumTestDemo2" duration-ms="17643" started-at="2017-10-27T08:36:13Z" finished-at="2017-10-27T08:36:31Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11123" started-at="2017-10-25T02:36:39Z" finished-at="2017-10-25T02:36:50Z">
-      <class name="com.cpeoc.appiunTestDemo.conf.TestRunner">
-        <test-method status="PASS" signature="startServer()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="startServer" is-config="true" duration-ms="10535" started-at="2017-10-25T10:36:39Z" finished-at="2017-10-25T10:36:49Z">
+    <test name="127.0.0.1:62001" duration-ms="17643" started-at="2017-10-27T08:36:13Z" finished-at="2017-10-27T08:36:31Z">
+      <class name="com.cpeoc.appiunTestDemo.test.TestCase2">
+        <test-method status="PASS" signature="startAppiumServer()[pri:0, instance:com.cpeoc.appiunTestDemo.test.TestCase2@38082d64]" name="startAppiumServer" is-config="true" duration-ms="8398" started-at="2017-10-27T16:36:05Z" finished-at="2017-10-27T16:36:13Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startServer -->
-        <test-method status="PASS" signature="excTestngXml()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="excTestngXml" duration-ms="164" started-at="2017-10-25T10:36:49Z" finished-at="2017-10-25T10:36:49Z">
+        </test-method> <!-- startAppiumServer -->
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.cpeoc.appiunTestDemo.test.TestCase2@38082d64]" name="setUp" is-config="true" duration-ms="12203" started-at="2017-10-27T16:36:13Z" finished-at="2017-10-27T16:36:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[127.0.0.1:62001]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[4.4]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[9000]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- excTestngXml -->
-        <test-method status="PASS" signature="stopServer()[pri:0, instance:com.cpeoc.appiunTestDemo.conf.TestRunner@75bd9247]" name="stopServer" is-config="true" duration-ms="415" started-at="2017-10-25T10:36:49Z" finished-at="2017-10-25T10:36:50Z">
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="swipeIntoHome()[pri:0, instance:com.cpeoc.appiunTestDemo.test.TestCase2@38082d64]" name="swipeIntoHome" duration-ms="3146" started-at="2017-10-27T16:36:25Z" finished-at="2017-10-27T16:36:28Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- stopServer -->
-      </class> <!-- com.cpeoc.appiunTestDemo.conf.TestRunner -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- swipeIntoHome -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.cpeoc.appiunTestDemo.test.TestCase2@38082d64]" name="tearDown" is-config="true" duration-ms="2287" started-at="2017-10-27T16:36:28Z" finished-at="2017-10-27T16:36:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="stopAppiumServer()[pri:0, instance:com.cpeoc.appiunTestDemo.test.TestCase2@38082d64]" name="stopAppiumServer" is-config="true" duration-ms="306" started-at="2017-10-27T16:36:31Z" finished-at="2017-10-27T16:36:31Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stopAppiumServer -->
+      </class> <!-- com.cpeoc.appiunTestDemo.test.TestCase2 -->
+    </test> <!-- 127.0.0.1:62001 -->
+  </suite> <!-- appiumTestDemo2 -->
 </testng-results>

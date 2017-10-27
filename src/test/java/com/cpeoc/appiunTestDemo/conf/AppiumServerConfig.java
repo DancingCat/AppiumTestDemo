@@ -9,7 +9,7 @@ package com.cpeoc.appiunTestDemo.conf;
  */
 public interface AppiumServerConfig {
 	
-	/** 运行主机ip */
+	/** 运行主机ip */   //192.183.253.80
 	String serverHost = "192.168.31.119";
 	
 	/** 运行用例的客户端，可选：android和ios */
@@ -31,6 +31,6 @@ public interface AppiumServerConfig {
 	String adbPath="/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools/adb";
 	
 	/**  selenium hub以及appium server启动超时时间，单位毫秒；首次启动可能时间稍长 */
-	int serverStartUpTimeOut = 10000;
+	int serverStartUpTimeOut = 20000;
 	
 }
