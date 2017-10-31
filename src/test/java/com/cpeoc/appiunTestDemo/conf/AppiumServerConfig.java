@@ -9,8 +9,8 @@ package com.cpeoc.appiunTestDemo.conf;
  */
 public interface AppiumServerConfig {
 	
-	/** 运行主机ip */   //192.183.253.80
-	String serverHost = "192.168.31.119";
+	/** 运行主机ip */   //192.183.253.80 192.168.31.119
+	String serverHost = "192.183.3.11";
 	
 	/** 运行用例的客户端，可选：android和ios */
 	String client = "android";
