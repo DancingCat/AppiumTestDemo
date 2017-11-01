@@ -17,7 +17,7 @@ public class CreatXML {
 	boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
 	List<Device> deviceList = new ArrayList<Device>();
 	
-	@Test
+	//@Test
 	public void creatXML(){
 		
 		if(!isIOS){
