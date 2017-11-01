@@ -27,7 +27,13 @@
 	4.需要安装的xxx
 	
 	5.运行方式（为了方便集成allure）
-	    先运行utils下的testng.xml来生成工程需要的testng.xml（tmp目录下）
-	    运行tmp\testng.xml
+	
+	本地：
+	          运行utils下的CreatXML类，会根据conf下的配置在tmp下生成testng.xml文件
+	          运行tmp下的testng.xml
+	jenkins：
+	   	 mvn -Dtest=CreatXML test
+	   	 mvn clean test
+
 	
 	

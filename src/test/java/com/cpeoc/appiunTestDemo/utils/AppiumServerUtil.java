@@ -54,8 +54,7 @@ public class AppiumServerUtil {
 		if (allureresults.exists()) {
 			FileUtil fu = new FileUtil();
 			fu.deleteFile(allureresults);
-		}
-		
+		}		
 		
 		if(!isIOS){
 			//获取所有安卓设备

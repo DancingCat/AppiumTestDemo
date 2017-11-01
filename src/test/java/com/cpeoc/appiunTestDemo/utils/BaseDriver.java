@@ -17,7 +17,6 @@ import org.testng.annotations.Parameters;
 import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
 import com.cpeoc.appiunTestDemo.utils.AppiumServerUtil;
 import com.cpeoc.appiunTestDemo.utils.DeviceUtil;
-import com.cpeoc.appiunTestDemo.utils.TestNGListener;
 
 import io.appium.java_client.AppiumDriver;
 /**

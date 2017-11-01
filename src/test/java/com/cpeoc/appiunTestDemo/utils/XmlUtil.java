@@ -62,7 +62,14 @@ public class XmlUtil {
 			suite.addAttribute("parallel", "tests");
 			suite.addAttribute("thread-count", deviceList.size() + "");
 		}
-
+		
+		//添加失败自动截图listner
+		Element listeners = suite.addElement("listeners");
+		Element listener = listeners.addElement("listener");
+		listener.addAttribute("class-name", "com.cpeoc.appiunTestDemo.utils.TestNGListener");
+		
+		
+		
 		// 用例分配 如果模块数量>= 设备数量 按模块分配；否则按class分配
 		// 用例分配采用平均分配算法
 		// test下建议使用模块划分用例

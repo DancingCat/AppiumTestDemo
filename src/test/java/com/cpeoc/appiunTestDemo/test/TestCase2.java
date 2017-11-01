@@ -32,17 +32,17 @@ public class TestCase2 extends BaseDriver{
 		GuidePage gp = new GuidePage(driver);
 		gp.swipeIntoHome();
 		
-		try {
-			takeScreenShot("ssss");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			takeScreenShot("ssss");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		Assert.assertTrue(csp.isMessageDisplay());
 	}
 
 	
-	 @Attachment(value = "Failure in method {0}", type = "image/png")
-	 private byte[] takeScreenShot(String methodName) throws IOException {
-	       return driver.getScreenshotAs(OutputType.BYTES);
-	 }
+//	 @Attachment(value = "Failure ScreenShot", type = "image/png")
+//	 private byte[] takeScreenShot(String methodName) throws IOException {
+//	       return driver.getScreenshotAs(OutputType.BYTES);
+//	 }
 }
