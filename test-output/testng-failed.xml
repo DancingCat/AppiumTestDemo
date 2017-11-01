@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="1" name="Failed suite [appiumTestDemo2]" parallel="tests">
-  <parameter name="port" value="9000"/>
-  <parameter name="platformVersion" value="4.4"/>
-  <parameter name="deviceName" value="127.0.0.1:62001"/>
-  <test name="127.0.0.1:62001(failed)" parallel="tests">
-    <parameter name="port" value="9000"/>
-    <parameter name="platformVersion" value="4.4"/>
-    <parameter name="deviceName" value="127.0.0.1:62001"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [createXML]">
+  <test name="preTest(failed)">
     <classes>
-      <class name="com.cpeoc.appiunTestDemo.test.TestCase2">
+      <class name="com.cpeoc.appiunTestDemo.utils.CreatTestNGXML">
         <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="swipeIntoHome"/>
-          <include name="stopAppiumServer"/>
-          <include name="startAppiumServer"/>
+          <include name="creatXML"/>
         </methods>
-      </class> <!-- com.cpeoc.appiunTestDemo.test.TestCase2 -->
+      </class> <!-- com.cpeoc.appiunTestDemo.utils.CreatTestNGXML -->
     </classes>
-  </test> <!-- 127.0.0.1:62001(failed) -->
-</suite> <!-- Failed suite [appiumTestDemo2] -->
+  </test> <!-- preTest(failed) -->
+</suite> <!-- Failed suite [createXML] -->

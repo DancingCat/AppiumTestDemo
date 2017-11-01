@@ -1,5 +1,12 @@
 package com.cpeoc.appiunTestDemo.test;
 
+import java.io.File;
+import java.io.IOException;
+
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
+
+import org.openqa.selenium.OutputType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,11 +25,24 @@ import com.cpeoc.appiunTestDemo.utils.BaseDriver;
 public class TestCase2 extends BaseDriver{
 
 	@Test
+	@Description("滑动进入首页")
+	@Attachment
 	public void swipeIntoHome() {
 		CitySelectPage csp = new CitySelectPage(driver);	
 		GuidePage gp = new GuidePage(driver);
 		gp.swipeIntoHome();
+		
+		try {
+			takeScreenShot("ssss");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Assert.assertTrue(csp.isMessageDisplay());
 	}
 
+	
+	 @Attachment(value = "Failure in method {0}", type = "image/png")
+	 private byte[] takeScreenShot(String methodName) throws IOException {
+	       return driver.getScreenshotAs(OutputType.BYTES);
+	 }
 }
