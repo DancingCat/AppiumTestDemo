@@ -49,6 +49,14 @@ public class AppiumServerUtil {
 //		}
 //		tmp.mkdir();
 		
+		//删除allure-results文件夹
+		File allureresults = new File("allure-results");
+		if (allureresults.exists()) {
+			FileUtil fu = new FileUtil();
+			fu.deleteFile(allureresults);
+		}
+		
+		
 		if(!isIOS){
 			//获取所有安卓设备
 			deviceList = DeviceUtil.getAndroidDevicesList();
