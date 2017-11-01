@@ -17,8 +17,8 @@ public class CreatXML {
 	boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
 	List<Device> deviceList = new ArrayList<Device>();
 	
-	//@Test
-	public void creatXML(){
+	@Test
+	public void creatRuntimeXML(){
 		
 		if(!isIOS){
 			//获取所有安卓设备
