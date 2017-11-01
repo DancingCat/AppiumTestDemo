@@ -12,7 +12,7 @@ import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
  * @author kk
  * 生成到tmp目录下，以便mvn clean test使用
  */
-public class CreatTestNGXML {
+public class CreatXML {
 
 	boolean isIOS = AppiumServerConfig.client.toLowerCase().equals("ios");
 	List<Device> deviceList = new ArrayList<Device>();
