@@ -11,7 +11,7 @@ import com.cpeoc.appiunTestDemo.conf.AppiumServerConfig;
 
 /**
  * TestNGXML文件生成
- * @author kk
+ * @author ken
  * 生成到tmp目录下，以便mvn clean test使用
  */
 public class CreatXML {
